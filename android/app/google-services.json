@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869095608675",
+    "project_id": "vietlotpower",
+    "storage_bucket": "vietlotpower.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869095608675:android:d42b4957ee74b798b44356",
+        "android_client_info": {
+          "package_name": "com.example.testttt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFsw7K8kIcd_Qi_6rPWKI-8XKvpqn8ep4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
