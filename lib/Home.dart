@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 class _Homestate extends State<Home> {
   final CollectionReference donor =
       FirebaseFirestore.instance.collection('Power6.55');
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -124,16 +125,13 @@ class _Homestate extends State<Home> {
                                       ),
                                       Row(
                                         children: [
-                                          Text(
-                                            'Tỉ lệ:'
-                                          ),
+                                          Text('Tỉ lệ:'),
                                         ],
                                       ),
-                                       Row(
+                                      Row(
                                         children: [
-                                          Text(                                          
-                                                documentSnapshot['tile']
-                                                    .toString(),
+                                          Text(
+                                            documentSnapshot['tile'].toString(),
                                           ),
                                         ],
                                       )

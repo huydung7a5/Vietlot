@@ -1,5 +1,6 @@
 // bước 1 khai bao import thu vien
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // bước 2: main
@@ -22,6 +23,17 @@ class _EditnumberState extends State<Editnumber> {
     4.285714285714286,
   ];
   String? selectedgroup;
+  final CollectionReference donor =
+      FirebaseFirestore.instance.collection('Power6.55');
+
+  TextEditingController so = TextEditingController();
+  TextEditingController solanxuathien = TextEditingController();
+
+  void addnumber() {
+    final data = {'so': so.text, 'solanxuathien': solanxuathien.text, 'tile': selectedgroup};
+    donor.add(data);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +47,7 @@ class _EditnumberState extends State<Editnumber> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: so,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Nhập số',
@@ -44,6 +57,7 @@ class _EditnumberState extends State<Editnumber> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: solanxuathien,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Nhập số lần xuất hiện',
@@ -53,9 +67,9 @@ class _EditnumberState extends State<Editnumber> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButtonFormField(
-                  decoration: InputDecoration(
-                    label: Text("Tỉ lệ phần trăm"),
-                  ),
+                    decoration: InputDecoration(
+                      label: Text("Tỉ lệ phần trăm"),
+                    ),
                     items: tilegroups
                         .map((e) => DropdownMenuItem(
                               child: Text(e.toString()),
@@ -67,7 +81,10 @@ class _EditnumberState extends State<Editnumber> {
                     }),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  addnumber();
+                  Navigator.pop(context);
+                },
                 style: ButtonStyle(
                     minimumSize:
                         MaterialStateProperty.all(Size(double.infinity, 50)),
