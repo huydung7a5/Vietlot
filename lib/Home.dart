@@ -69,26 +69,83 @@ class _Homestate extends State<Home> {
               ),
             ),
             Expanded(
-              child: StreamBuilder(
-                  stream: donor.snapshots(),
-                  builder: (context, AsyncSnapshot snapshots) {
-                    if (snapshots.hasData) {
-                      return ListView.builder(
-                          itemCount: snapshots.data.docs.length,
-                          itemBuilder: (context, index) {
-                            final DocumentSnapshot documentSnapshot =
-                                snapshots.data.docs[index];
-                            return Column(children: [
-                              Text("số: " + documentSnapshot['so'].toString()),
-                              Text("Tỉ lệ: " +
-                                  documentSnapshot['tile'].toString()),
-                              Text("Số lần xuất hiện: " +
-                                  documentSnapshot['solanxuathien'].toString())
-                            ]);
-                          });
-                    }
-                    return Container();
-                  }),
+              child: OverflowBox(
+                maxWidth: MediaQuery.of(context).size.width,
+                child: StreamBuilder(
+                    stream: donor.snapshots(),
+                    builder: (context, AsyncSnapshot snapshots) {
+                      if (snapshots.hasData) {
+                        return GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount:
+                                        2, // Số cột bạn muốn hiển thị
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 20,
+                                    childAspectRatio: 2.1),
+                            itemCount: snapshots
+                                .data.docs.length, // chia listview thành 2 cột
+                            itemBuilder: (context, index) {
+                              final DocumentSnapshot documentSnapshot =
+                                  snapshots.data.docs[index];
+                              return Column(children: [
+                                Container(
+                                  margin: EdgeInsets.all(5),
+                                  height: 81,
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.7,
+                                    ),
+                                  ),
+                                  child: Center(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Số: ' +
+                                                documentSnapshot['so']
+                                                    .toString(),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Số lần xuất hiên: ' +
+                                                documentSnapshot[
+                                                        'solanxuathien']
+                                                    .toString(),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Tỉ lệ:'
+                                          ),
+                                        ],
+                                      ),
+                                       Row(
+                                        children: [
+                                          Text(                                          
+                                                documentSnapshot['tile']
+                                                    .toString(),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )),
+                                )
+                              ]);
+                            });
+                      }
+                      return Container();
+                    }),
+              ),
             ),
           ],
         ),
