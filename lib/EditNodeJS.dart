@@ -1,16 +1,21 @@
 // bước 1 khai bao import thu vien
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // bước 2: main
-class Editnumber extends StatefulWidget {
-  const Editnumber({super.key});
+class EditNodeJS extends StatefulWidget {
+  const EditNodeJS({super.key});
+
   @override
-  State<Editnumber> createState() => _EditnumberState();
+  State<EditNodeJS> createState() => _EditNodeJSState();
 }
 
-class _EditnumberState extends State<Editnumber> {
+class _EditNodeJSState extends State<EditNodeJS> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final tilegroups = [
     0.4761904761904762,
     0.9523809523809524,
@@ -23,23 +28,24 @@ class _EditnumberState extends State<Editnumber> {
     4.285714285714286,
   ];
   String? selectedgroup;
-  final CollectionReference donor =
-      FirebaseFirestore.instance.collection('Power6.55');
-
   TextEditingController so = TextEditingController();
   TextEditingController solanxuathien = TextEditingController();
-    
   void addnumber() {
     final data = {
       'so': so.text,
       'solanxuathien': solanxuathien.text,
       'tile': selectedgroup
     };
-    donor.add(data);
   }
 
   @override
   Widget build(BuildContext context) {
+    final value = ModalRoute.of(context)!.settings.arguments;
+    final data = value as Map;
+    so = TextEditingController(text: data['so'].toString());
+    solanxuathien =
+        TextEditingController(text: data['solanxuathien'].toString());
+    selectedgroup = data['tile'].toString();
     return Scaffold(
         appBar: AppBar(
           title: Text("Edit"),
@@ -66,6 +72,12 @@ class _EditnumberState extends State<Editnumber> {
                     border: OutlineInputBorder(),
                     labelText: 'Nhập số lần xuất hiện',
                   ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  value['tile'].toString(),
                 ),
               ),
               Padding(

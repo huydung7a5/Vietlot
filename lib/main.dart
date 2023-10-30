@@ -1,8 +1,11 @@
 // bước 1 khai bao import thu vien
 
 import 'package:flutter/material.dart';
+import 'package:testttt/HomeNodeJS.dart';
 import 'Edit.dart';
 import 'Home.dart';
+import 'HomeNodeJS.dart';
+import 'EditNodeJS.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 // bước 2: main
@@ -19,8 +22,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Demo app",
       routes: {
-        '/': (context) => Home(),
-        '/edit': (context) => Editnumber(),
+        '/': (context) => HomeNodeJS(),
+        '/edit': (context) => EditNodeJS(),
       },
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
